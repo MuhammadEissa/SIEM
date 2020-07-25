@@ -22,3 +22,5 @@ fi
 su $DAEMON_USER -c "$DAEMON $1 $2"
 exit $?
 -------------------------------------------------------------------
+
+in order to modify the scrirpt to for the Logger we just need to change arcsight_arcmc to in all parameters arcsight_logger.

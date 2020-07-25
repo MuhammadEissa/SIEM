@@ -1,0 +1,24 @@
+Starting Services Automatically for a Non-Root Installation: -
+	/etc/init.d
+	vi arcsight_arcmc
+	chmod +x arcsight_arcmc
+	chkconfig --add arcsight_arcmc	
+	chkconfig | grep arcsight_arcmc
+
+----------------------------------------------------------------------
+#!/bin/sh
+# ArcMC Wrapper script for the Arcsight Management Center
+# processname: arcsight_arcmc
+# chkconfig: 2345 99 01
+# description: Arcsight Management Center
+DAEMON=/opt/current/arcsight/arcmc/bin/arcmcd
+DAEMON_USER=arcsight
+# Exit if the package is not installed
+[ -x "$DAEMON" ] || exit 0
+if [ $UID -ne 0 ] ; then
+echo "You must run this as root."
+exit 4
+fi
+su $DAEMON_USER -c "$DAEMON $1 $2"
+exit $?
+-------------------------------------------------------------------
